@@ -1,3 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","4447","test_can_open_homepage[chromium]","tests.smoke","2025-09-16","passed","2025-09-16","","test_home","",""
-"","11771","test_search_smoke[chromium]","tests.smoke","2025-09-16","broken","2025-09-16","","test_home","",""
