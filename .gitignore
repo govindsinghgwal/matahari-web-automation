@@ -11,3 +11,5 @@ allure-results/
 .env.example
 .env.example/
 .env
+allure-report/
+
