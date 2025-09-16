@@ -27,12 +27,6 @@ def test_login_navigation(page, base_url):
     home = HomePage(page, base_url)
     home.goto()
     home.dismiss_overlay_if_present()
-    # Click account icon and wait for login/account page to be ready
     home.click_account_icon_and_wait_login()
 
-    # home.dismiss_marketing_overlay()
-
-    # page.click("a.site-nav__link.site-nav__link--icon.small--hide.header-account-icon", timeout=10000)
-
-    # page.wait_for_url("**/login", timeout=15000)
-    # assert "login" in page.url
+    assert "login" in page.url
