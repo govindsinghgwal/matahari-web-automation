@@ -1,15 +1,33 @@
-from playwright.sync_api import Page, expect
-from playwright.sync_api import TimeoutError as PWTimeout
+# from playwright.sync_api import Page, expect
+# from playwright.sync_api import TimeoutError as PWTimeout
 
+# import re
+
+# class HomePage:
+#     def __init__(self, page: Page, base_url: str):
+#         self.page = page
+#         self.base_url = base_url.rstrip("/")
+
+#     def goto(self):
+#         self.page.goto(self.base_url + "/", wait_until="domcontentloaded")
+# pages/home_page.py
 import re
+from contextlib import suppress
+from playwright.sync_api import Page
+from playwright.sync_api import Page, expect, TimeoutError as PWTimeout
+
 
 class HomePage:
-    def __init__(self, page: Page, base_url: str):
+    def __init__(self, page: Page, base_url: str | None):
         self.page = page
-        self.base_url = base_url.rstrip("/")
+        base = base_url or "https://www.matahari.com"
+        if not re.match(r"^https?://", base):
+            base = "https://" + base.lstrip("/")
+        self.base_url = base.rstrip("/")
 
-    def goto(self):
-        self.page.goto(self.base_url + "/", wait_until="domcontentloaded")
+    def goto(self) -> None:
+        self.page.goto(f"{self.base_url}/", wait_until="domcontentloaded")
+
 
     def is_loaded(self):
         expect(self.page.locator("body")).to_be_visible()
@@ -61,7 +79,7 @@ class HomePage:
             self.page.click(account_icon, timeout=5000)
         except Exception:
            
-            self.close_discount_popup()
+            self.close_popup()
             self.page.keyboard.press("Escape")
             self.page.click(account_icon, force=True, timeout=5000)
 
